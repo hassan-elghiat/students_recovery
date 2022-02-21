@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+}
+
+.grid-temp {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 15fr;
+  grid-template-areas:
+    "header header header"
+    "sidebar main main";
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.main {
+  grid-area: main;
+}
