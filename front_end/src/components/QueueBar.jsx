@@ -3,6 +3,7 @@ import "./QueueBar.css";
 import "./barcss.css";
 import "./utsframe.css";
 
+
 const QueueBar = ({
   firstName,
   id,
@@ -17,20 +18,20 @@ const QueueBar = ({
   return (
     // the code of the parent bar should be Here
     
-    
 
-          <section class="u-clearfix u-section-1" id="sec-4fba">
-        <div class="u-container-style u-group u-radius-28 u-shape-round u-white u-group-1">
-          <div class="u-container-layout u-container-layout-1">
-            <img class="u-border-4 u-border-palette-2-light-2 u-image u-image-circle u-image-1" src="assets/images/ImageHolder_3.png" alt="" data-image-width="400" data-image-height="265"></img>
-            <img class="u-border-4 u-border-palette-2-light-2 u-image u-image-circle u-image-2" src="assets/images/ImageHolder_2.png" alt="" data-image-width="400" data-image-height="265"></img>
-            <img class="u-border-4 u-border-palette-2-light-2 u-image u-image-circle u-image-3" src="assets/images/ImageHolder_1.png" alt="" data-image-width="400" data-image-height="265"></img>
-            <img class="u-border-4 u-border-palette-2-light-2 u-image u-image-circle u-image-4" src="assets/images/ImageHolder.png" alt="" data-image-width="400" data-image-height="265"></img>
-            <h3 class="u-text u-text-1">Parent FullName name : {firstName}</h3>
-          </div>
-      </div>
+    <section class=" u-section-1" id="sec-4fba">
+      <div class="u-container-style u-group u-radius-17 u-shape-round u-white u-group-1">
+        <div class="u-container-layout u-container-layout-1">
+        <img class=" u-border-palette-2-light-2 u-image u-image-circle u-image-1" src="assets/images/ImageHolder_3.png" alt="" data-image-width="400" data-image-height="265"></img>
+            <img class=" u-border-palette-2-light-2 u-image u-image-circle u-image-2" src="assets/images/ImageHolder_2.png" alt="" data-image-width="400" data-image-height="265"></img>
+            <img class="u-border-palette-2-light-2 u-image u-image-circle u-image-3" src="assets/images/ImageHolder_1.png" alt="" data-image-width="400" data-image-height="265"></img>
+            <img class=" u-border-palette-2-light-2 u-image u-image-circle u-image-4" src="assets/images/ImageHolder.png" alt="" data-image-width="400" data-image-height="265"></img>
+          <h3 class="u-text u-text-1">{firstName}</h3>
+        </div>
     
-          
+    
+       
+
           
       {/* {childreen.map((child, i) => (
      
@@ -43,6 +44,7 @@ const QueueBar = ({
           
         </div>
       ))} */}
+      </div>
       </section>
   );
 };
