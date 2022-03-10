@@ -6,6 +6,7 @@ import ParentShow from "./components/ParentShow";
 
 function App() {
   const [parents] = useState(Parents);
+  const [delivered, setDelivered] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     let ind = 0;
@@ -22,10 +23,36 @@ function App() {
   return (
     <div className="Main_App w-screen h-screen grid-temp ">
       {/* header */}
-      <div className=" bg-blue-500  header "></div>
+      <div className="  shadow-lg header flex justify-start items-center ">
+        <img
+          src="https://www.logopik.com/wp-content/uploads/edd/2018/11/Education-School-Vector-Logo.png"
+          className="w-24"
+          alt="logo"
+        />
+        <span className="">kamberg University</span>
+      </div>
+      <div className="   bg-gray-100 delivered ">
+        {delivered.length > 0 ? (
+          delivered
+            .reverse()
+            .map((parent, i) => (
+              <QueueBar
+                key={`delivered-queue-${parent.id}`}
+                {...parent}
+                index={i}
+              />
+            ))
+        ) : (
+          <div className="flex  h-full justify-center items-center p-8">
+            <span className="capitalize font-semibold whitespace-pre-wrap text-center">
+              No parent Has Taken his childreen yet
+            </span>
+          </div>
+        )}
+      </div>
       {/* waiting List  */}
-      <div className=" bg-red-400  sidebar flex flex-col p-8  max-h-screen overflow-y-auto scrollbar">
-        {Parents.map((parent, i) => (
+      <div className=" bg-gray-100   queue flex flex-col p-8  max-h-screen overflow-y-auto scrollbar">
+        {Parents.reverse().map((parent, i) => (
           <QueueBar
             key={`waitingBar-queue-${parent.id}`}
             {...parent}
@@ -34,7 +61,7 @@ function App() {
         ))}
       </div>
       {/* main */}
-      <div className="  bg-yellow-500  main grid place-items-center p-12">
+      <div className="  bg-gray-100   main grid place-items-center p-12">
         {parents[currentIndex] !== undefined && (
           <ParentShow
             key={`waitingParent-${parents[currentIndex]?.id}`}

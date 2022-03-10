@@ -32,7 +32,7 @@ const ParentShow = ({ firstName, lastName, image, childreen }) => {
   return (
     <div className="relative w-full h-full bg-white rounded-lg p-8 flex  justify-start items-center shadow-lg overflow-hidden">
       {/* green dot */}
-      <div className="h-8 aspect-square rounded-full bg-green-400 absolute top-5 left-5 animate-bounce 	grid place-items-center">
+      <div className="h-8 aspect-square rounded-lg bg-green-400 absolute top-5 left-5 animate-bounce 	grid place-items-center">
         <span className="text-white">{10 - secondsPassed}</span>
       </div>
       <motion.div
@@ -47,10 +47,10 @@ const ParentShow = ({ firstName, lastName, image, childreen }) => {
       >
         <img
           src={`${image}`}
-          className="w-full h-full bg-pink-300 rounded-lg aspect-square  shadow-lg"
+          className="w-full h-full bg-gray-400 rounded-lg aspect-square  shadow-lg"
           alt=""
         />
-        <span className="font-medium capitalize">{`${firstName} ${lastName}`}</span>
+        <span className="font-semibold text-2xl capitalize">{`${firstName} ${lastName}`}</span>
       </motion.div>
       <div className=" grid grid-cols-1 min-w-[50%] aspect-square   ">
         {childreen.map((child, childIndex) => {
@@ -72,10 +72,10 @@ const ParentShow = ({ firstName, lastName, image, childreen }) => {
               >
                 <img
                   src={`${child.image}`}
-                  className="w-full h-full bg-pink-300 rounded-lg  shadow-lg"
+                  className="w-full h-full bg-gray-400 rounded-lg  shadow-lg"
                   alt=""
                 />
-                <span className="font-medium capitalize">{`${child.firstName} ${lastName}`}</span>
+                <span className="font-semibold text-xl capitalize">{`${child.firstName} ${lastName}`}</span>
               </motion.div>
             );
         })}
