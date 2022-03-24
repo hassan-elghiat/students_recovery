@@ -4,20 +4,20 @@ import React, { useState } from "react";
 const Add = ({}) => {
   const [modalShow, setModalShow] = useState(false);
   const [myImage, setMyImage] = useState("");
-  const [childreen, setChildreen] = useState([
-    { fullName: "", massarId: "", level: "", age: 0 },
-  ]);
+  const [childreen, setChildreen] = useState([""]);
   const addNewChildFields = () => {
-    setChildreen([
-      ...childreen,
-      { fullName: "", massarId: "", level: "", age: 0 },
-    ]);
+    setChildreen([...childreen, ""]);
   };
   const onClick = () => {};
   return (
     <div className="w-full h-screen flex items-center justify-evenly ">
-      <div className="absolute w-full h-full bg-blue-300 p-24">
-        <main className="flex w-full flex-1 flex-col gap-8 px-12 pt-4 bg-gray-300 rounded-2xl">
+      <img
+        src="https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        className="absolute w-full h-full object-cover "
+        alt="ImageBackground"
+      />
+      <div className="absolute w-full h-full  backdrop-blur-md p-24 ">
+        <main className="relative flex w-full flex-1 flex-col gap-8 px-12 pt-4  back rounded-2xl">
           <Formik
             enableReinitialize
             initialValues={{
@@ -119,6 +119,31 @@ const Add = ({}) => {
                       </label>
                     </div>
                     {/* childreen */}
+
+                    <div className="relative mb-10 grid grid-cols-2 w-full gap-4">
+                      {values.childreen.map((child, index) => {
+                        return (
+                          <div className="relative flex justify-center items-center">
+                            <input
+                              placeholder="Massar ID"
+                              id={`${index}`}
+                              name={`${index}`}
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.childreen[index]}
+                              type="text"
+                              className="bg-lightGray peer  w-full rounded-lg px-4 py-2 placeholder-transparent"
+                            />
+                            <label
+                              htmlFor={`${index}`}
+                              className="absolute left-2 bottom-12 pl-3 font-semibold capitalize text-black transition-all peer-focus:bottom-12 peer-placeholder-shown:bottom-2 "
+                            >
+                              Massar ID (Child N.{index + 1})
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
                     <div className="relative  mb-10 flex  w-full flex-1 justify-end ">
                       <span
                         className="px-4 py-2 rounded-md text-black  bg-white font-semibold cursor-pointer"
@@ -129,32 +154,7 @@ const Add = ({}) => {
                         Add Child
                       </span>
                     </div>
-                    <div className="relative mb-10 grid grid-cols-2 w-full">
-                      {values.childreen.map((child, index) => {
-                        return (
-                          <div className="">
-                            <input
-                              placeholder="Full Name"
-                              id={`childreen.fullName.${index}`}
-                              name="childreen.fullName"
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={values.childreen[index].fullName}
-                              type="text"
-                              className="bg-lightGray peer  w-full rounded-lg px-4 py-2 placeholder-transparent"
-                            />
-                            <label
-                              htmlFor="childreen.fullName"
-                              className="absolute left-2 bottom-14 pl-3 font-semibold capitalize text-black transition-all peer-focus:bottom-14 peer-placeholder-shown:bottom-3 "
-                            >
-                              Full Name
-                            </label>
-                          </div>
-                        );
-                      })}
-                    </div>
                   </div>
-                  {/*  */}
                   {/* save button */}
                   <div className="relative  mb-10 flex  w-full flex-1 justify-end ">
                     <input
@@ -165,9 +165,8 @@ const Add = ({}) => {
                   </div>
                 </div>
                 {/* image */}
-
                 <div
-                  className={`bg-gray relative grid h-full flex-[1] min-w-[50%] place-items-center rounded-2xl  hover:opacity-90 `}
+                  className={`bg-gray relative grid h-full flex-[1] min-w-[50%] place-items-center rounded-2xl transition-all  hover:scale-105 `}
                   style={
                     myImage
                       ? {
@@ -180,11 +179,9 @@ const Add = ({}) => {
                 >
                   <label for="myImage">
                     <img
-                      src={`https://img.icons8.com/ios/100/${
-                        myImage ? `ffffff` : `000000`
-                      }/add--v1.png`}
+                      src={`https://img.icons8.com/ios/100/${`ffffff`}/add--v1.png`}
                       alt="addIcon"
-                      className=" cursor-pointer transition-all duration-100 hover:rotate-90 hover:scale-110"
+                      className=" cursor-pointer transition-all duration-100 hover:rotate-90 hover:scale-110 drop-shadow-md"
                     />
                   </label>
                   <input
