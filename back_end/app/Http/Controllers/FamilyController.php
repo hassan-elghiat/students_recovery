@@ -68,7 +68,7 @@ class FamilyController extends Controller
      }
      public function getStudentFamily()
      {
-         $familyP = DB::select('select P.firstName  ,P.lastName  ,P.image , S.lastName,S.firstName,S.image,S.niveau,P.cin,P.code_Massar
+          $familyP = DB::select('select P.firstName as firstNameP ,P.lastName as lastNameP ,P.image as imageP, S.lastName,S.firstName,S.image,S.niveau,P.cin,P.code_Massar
          from students S,family P
          where P.code_Massar=S.code_Massar');
          return  $familyP;
