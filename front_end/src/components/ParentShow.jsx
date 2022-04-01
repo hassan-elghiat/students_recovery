@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
-const ParentShow = ({ firstName, lastName, image, childreen }) => {
+const ParentShow = ({ firstName, lastName, photo, students }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mountTime] = useState(new Date());
   const [secondsPassed, setSecondsPassed] = useState(0);
@@ -9,7 +9,7 @@ const ParentShow = ({ firstName, lastName, image, childreen }) => {
   useEffect(() => {
     let ind = 0;
     const interval = setInterval(() => {
-      if (ind + 1 > childreen.length - 1) {
+      if (ind + 1 > students.length - 1) {
         ind = -1;
       }
       setCurrentIndex(++ind);
@@ -33,7 +33,7 @@ const ParentShow = ({ firstName, lastName, image, childreen }) => {
     <div className="relative w-full h-full bg-white rounded-lg p-8 flex  justify-start items-center shadow-lg overflow-hidden">
       {/* green dot */}
       <div className="h-8 aspect-square rounded-lg bg-green-400 absolute top-5 left-5 animate-bounce 	grid place-items-center">
-        <span className="text-white">{10 - secondsPassed}</span>
+        <span className="text-white">{10 - secondsPassed }</span>
       </div>
       <motion.div
         initial={{ scale: 0 }}
@@ -46,14 +46,14 @@ const ParentShow = ({ firstName, lastName, image, childreen }) => {
         className="flex flex-col justify-center items-center  flex-1 min-w-[50%] max-w-[50%]"
       >
         <img
-          src={`${image}`}
+          src={`${photo}`}
           className="w-full h-full bg-gray-400 rounded-lg aspect-square  shadow-lg"
           alt=""
         />
         <span className="font-semibold text-2xl capitalize">{`${firstName} ${lastName}`}</span>
       </motion.div>
       <div className=" grid grid-cols-1 min-w-[50%] aspect-square   ">
-        {childreen.map((child, childIndex) => {
+        {students.map((child, childIndex) => {
           if (childIndex === currentIndex)
             return (
               <motion.div
@@ -71,7 +71,7 @@ const ParentShow = ({ firstName, lastName, image, childreen }) => {
               `}
               >
                 <img
-                  src={`${child.image}`}
+                  src={`${child.photo}`}
                   className="w-full h-full bg-gray-400 rounded-lg  shadow-lg"
                   alt=""
                 />

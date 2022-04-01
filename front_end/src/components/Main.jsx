@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 
-import { Parents } from "../assets";
+//import { Parents } from "../assets";
 import QueueBar from "./QueueBar";
 import ParentShow from "./ParentShow";
 
-const Main = () => {
-  const [parents] = useState(Parents);
+const Main = ({Parents}) => {
   const [delivered, setDelivered] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     let ind = 0;
     const interval = setInterval(() => {
-      if (ind + 1 > parents.length - 1) {
+      if (ind + 1 > Parents.length - 1) {
         ind = -1;
       }
       setCurrentIndex(++ind);
@@ -20,7 +19,6 @@ const Main = () => {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <section>
       <div className="Main_App w-screen h-auto grid-temp max-h-screen bg-gray-100 ">
@@ -30,13 +28,13 @@ const Main = () => {
               .reverse()
               .map((parent, i) => (
                 <QueueBar
-                  key={`delivered-queue-${parent.id}`}
+                  key={`delivered-queue-${parent.parentId}`}
                   {...parent}
                   index={i}
                 />
               ))
           ) : (
-            <div classNa me="flex  h-full justify-center items-center p-8">
+            <div className="flex  h-full justify-center items-center p-8">
               <span className="capitalize font-semibold whitespace-pre-wrap text-center">
                 No parent Has Taken his childreen yet
               </span>
@@ -47,7 +45,7 @@ const Main = () => {
         <div className="queue flex flex-col p-8  max-h-screen overflow-y-auto scrollbar">
           {Parents.reverse().map((parent, i) => (
             <QueueBar
-              key={`waitingBar-queue-${parent.id}`}
+              key={`waitingBar-queue-${parent.parentId}`}
               {...parent}
               index={i}
             />
@@ -55,10 +53,14 @@ const Main = () => {
         </div>
         {/* main */}
         <div className="main grid place-items-center p-12">
-          {parents[currentIndex] !== undefined && (
+          
+          {Parents[currentIndex] !== undefined && (
             <ParentShow
-              key={`waitingParent-${parents[currentIndex]?.id}`}
-              {...parents[currentIndex]}
+              key={`waitingParent-${Parents[currentIndex]?.id}`}
+              students = {Parents[currentIndex].students}
+              firstName = {Parents[currentIndex].firstName}
+              lastName = {Parents[currentIndex].lastName}
+              photo = {Parents[currentIndex].photo}
               // index={currentIndex}
             />
           )}

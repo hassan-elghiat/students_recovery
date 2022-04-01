@@ -66,11 +66,11 @@ const QueueBar = ({
   firstName,
   id,
   lastName,
-  image,
+  photo,
   cin,
   address,
   phoneNumber,
-  childreen,
+  students,
   index,
 }) => {
   const imageSize = 16;
@@ -81,7 +81,7 @@ const QueueBar = ({
       key={`child-${id}-${index}`}
     >
       <div className="grid place-items-center  rounded-full border-8  shadow-xl border-gray-200    h-24 aspect-square overflow-hidden ">
-        <img src={image} alt="parentImage" className="w-full aspect-square " />
+        <img src={photo} alt="parentImage" className="w-full aspect-square " />
       </div>
       <div className=" flex-1 px-[5%] ">
         <span className="font-semibold capitalize text-lg">{`${firstName} ${lastName}`}</span>
@@ -90,14 +90,14 @@ const QueueBar = ({
         className="flex flex-row justify-start  "
         style={{ width: `${(imageSize * 3) / 4}rem` }}
       >
-        {childreen.map((child, i) => (
+        {students.map((child, i) => (
           // pour les image de l'enfant
           <div
             className={`grid place-items-center max-h-24 rounded-full  shadow-xl border-4  border-gray-200 aspect-square bg-gray-400 overflow-hidden
           ${i !== 0 && "-ml-4"} `}
           >
             <img
-              src={child.image}
+              src={child.photo}
               alt="parentImage"
               className="object-cover w-full  aspect-square"
               style={{ height: `${imageSize / 4}rem` }}

@@ -6,9 +6,9 @@ const ParentRow = ({
   firstName,
   lastName,
   cin,
-  address,
+  adress,
   phoneNumber,
-  childreen,
+  students,
   setSelected = () => 0,
 }) => {
   const styleText = `text-dark flex w-[15%] flex-1 items-center  justify-center overflow-hidden overflow-ellipsis whitespace-nowrap text-center font-semibold`;
@@ -19,11 +19,11 @@ const ParentRow = ({
     >
       <span className={`${styleText} pl-2 `}>{parentId}</span>
       <span className={`${styleText} `}>{firstName + " " + lastName}</span>
-      <span className={`${styleText}  `}>{address}</span>
+      <span className={`${styleText}  `}>{adress}</span>
       <span className={`${styleText} `}>{cin}</span>
       <span className={`${styleText} `}>{phoneNumber}</span>
-      <span className={`${styleText}  `}>
-        <ChildreenImages />
+      <span className={`${styleText} `}>
+        <ChildreenImages students={students}/>
       </span>
       <span className={`${styleText}  gap-4 md:max-w-[5%]`}>
         <img

@@ -4,6 +4,8 @@ const Nav = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const { isLoggedIn, setIsLoggedIn , setToken} = useContext(GlobalContext);
 
+  const token = localStorage.getItem('token');
+
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-black">
@@ -43,7 +45,8 @@ const Nav = () => {
                 !navbarOpen && " flow-root"
               }`}
             >
-              <li className="nav-item  float-left">
+              {
+                token !== '' && <> <li className="nav-item  float-left">
                 <a
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:text-yellow-400 hover:underline"
                   href="/home"
@@ -82,19 +85,22 @@ const Nav = () => {
                 >
                   Add Student
                 </a>
-              </li>
+              </li></>
+              }
+              
               <li
                 className="nav-item  float-right"
                 onClick={() => {
                   setIsLoggedIn(false);
                   setToken("");
+                  localStorage.setItem('token',"");
                 }}
               >
                 <a
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:text-yellow-400 hover:underline"
                   href="/"
                 >
-                  {isLoggedIn ? "Logout" : "Login"}
+                  {token !== '' ? "Logout" : "Login"}
                 </a>
               </li>
             </ul>

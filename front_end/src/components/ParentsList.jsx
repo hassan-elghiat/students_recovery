@@ -9,7 +9,7 @@ const ParentsList = ({ parents }) => {
       const res = await fetch(
         `https://my.api.mockaroo.com/parents?key=ab264e30`
       );
-      setData(Array.isArray(await res.json()) ? await res.json() : []);
+      setData(Array.isArray( res.json()) ? res.json() : []);
     })();
   }, []);
 
@@ -48,7 +48,7 @@ const ParentsList = ({ parents }) => {
           parents.map((item) => {
             return (
               <ParentRow
-                key={`${item.id}`}
+                key={`${item.parentId}`}
                 {...item}
                 selected={selected === item?.id}
                 setSelected={() => {

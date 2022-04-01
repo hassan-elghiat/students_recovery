@@ -12,12 +12,10 @@ const Parents = () => {
   const [parents, setParents] = useState([]);
   const url = `http://localhost:8090/parents/all`;
   useEffect(() => {
-    console.log(token);
     const headers = { 'Content-Type': 'application/json',"authorization":`${token}`};
     (async () => {
       const res = await Axios.get(url, {headers});
       setParents(res.data);
-      console.log(res.data)
     })();
   }, []);
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Axios from "axios";
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
 import StudentsList from "../components/StudentsList";
 
-import Axios from "axios";
 const Students = () => {
   const [item, setItem] = useState();
   const [students, setStudents] = useState([]);
