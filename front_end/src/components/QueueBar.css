@@ -1,11 +1,13 @@
 /* CSS HERE */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 .test {
   background-color: #f0f;
 }
 * {
   margin: 0;
   font-family: "Quicksand";
+}
+section {
   color: #333;
 }
 .navbar {
@@ -16,5 +18,3 @@
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
 }
-
-

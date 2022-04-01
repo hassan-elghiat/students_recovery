@@ -1,28 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
 import StudentsList from "../components/StudentsList";
 
+import Axios from "axios";
 const Students = () => {
   const [item, setItem] = useState();
-  const [data, setData] = useState([]);
+  const [students, setStudents] = useState([]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await axios.get(
-  //       `http://${window.location.hostname}:9000/students`
-  //     );
-  //     console.log(await res.data);
-  //     setData(await res.data);
-  //   })();
-  // }, []);
+  const token = localStorage.getItem('token');
+  const url = `http://localhost:8090/students/all`;
+  useEffect(() => {
+    console.log(token);
+    const headers = { 'Content-Type': 'application/json',"authorization":`${token}`};
+    (async () => {
+      const res = await Axios.get(url, {headers});
+      setStudents(res.data);
+      console.log(res.data)
+    })();
+  }, []);
   return (
     <div className="flex h-screen w-screen flex-col  justify-between ">
       <div className="bg-primaryFG flex h-[6vh] w-screen items-center justify-start rounded-b-3xl px-4"></div>
       <main className="flex w-full flex-1 flex-col gap-8 pt-4">
         {/* search */}
         <Search target="parent" />
-        <StudentsList list={data} />
+        <StudentsList list={students} />
       </main>
       {/* footer */}
       <div className="flex  w-full justify-between">

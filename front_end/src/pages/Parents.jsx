@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useState,useContext , useEffect} from "react";
 import { Link } from "react-router-dom";
 import { Parents as parentsList } from "../assets";
 import ParentsList from "../components/ParentsList";
 import Search from "../components/Search";
+
+import Axios from "axios";
+
 const Parents = () => {
   const [item, setItem] = useState();
-  const [data, setData] = useState(parentsList);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await axios.get(
-  //       `http://${window.location.hostname}:9000/parents`
-  //     );
-  //     setData(await res.data);
-  //   })();
-  // }, []);
+  const token = localStorage.getItem('token');
+  const [parents, setParents] = useState([]);
+  const url = `http://localhost:8090/parents/all`;
+  useEffect(() => {
+    console.log(token);
+    const headers = { 'Content-Type': 'application/json',"authorization":`${token}`};
+    (async () => {
+      const res = await Axios.get(url, {headers});
+      setParents(res.data);
+      console.log(res.data)
+    })();
+  }, []);
 
   return (
     <div className="flex h-screen w-screen flex-col  justify-between ">
@@ -22,7 +27,7 @@ const Parents = () => {
       <main className="flex w-full flex-1 flex-col gap-8 pt-4">
         {/* search */}
         <Search target="parent" />
-        <ParentsList list={data} />
+        <ParentsList parents={parents} />
       </main>
       {/* footer */}
       <div className="flex  w-full justify-between">

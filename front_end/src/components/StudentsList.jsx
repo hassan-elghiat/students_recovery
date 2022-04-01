@@ -31,10 +31,10 @@ const StudentsList = ({ list }) => {
           Massar Id
         </span>
         <span className="text-dark w-[15%] flex-1  whitespace-nowrap text-center font-semibold uppercase">
-          level
+          Birth Date
         </span>
         <span className="text-dark w-[15%] flex-1  whitespace-nowrap text-center font-semibold uppercase">
-          Age
+          Level
         </span>
         <span className="text-dark flex-1 whitespace-nowrap  text-center font-semibold uppercase md:max-w-[5%]">
           Actions

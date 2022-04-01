@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 
-const Add = ({}) => {
+const AddStudent = ({}) => {
   const [modalShow, setModalShow] = useState(false);
   const [myImage, setMyImage] = useState("");
   const [childreen, setChildreen] = useState([""]);
@@ -18,13 +18,14 @@ const Add = ({}) => {
       />
       <div className="absolute w-full h-full  backdrop-blur-md p-24 ">
         <main className="relative flex w-full flex-1 flex-col gap-8 px-12 pt-4  back rounded-2xl">
+        <h1 className="w-full text-black text-md">Add New Student</h1>
           <Formik
             enableReinitialize
             initialValues={{
               fullname: "",
               address: "",
-              cin: "",
-              phoneNumber: "",
+              parentID: "",
+              level: "",
               childreen,
             }}
             onSubmit={(values) => {
@@ -38,7 +39,7 @@ const Add = ({}) => {
               handleBlur,
               /* and other goodies */
             }) => (
-              <Form className="flex h-[90vh] w-full items-center justify-center p-24 ">
+              <Form className="flex w-full items-center justify-center p-24 pt-0">
                 {/* inputs collections for parent */}
                 <div className="flex flex-col px-12">
                   <div className="flex flex-1 flex-col items-center justify-center  ">
@@ -58,10 +59,28 @@ const Add = ({}) => {
                         htmlFor="fullname"
                         className="absolute left-2 bottom-14 pl-3 font-semibold capitalize text-black transition-all peer-focus:bottom-14 peer-placeholder-shown:bottom-3 "
                       >
-                        Full Name
+                        First Name
                       </label>
                     </div>
                     {/* lastName */}
+                    <div className="relative mb-10">
+                      <input
+                        placeholder="Full Name"
+                        id="fullname"
+                        name="fullname"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.fullname}
+                        type="text"
+                        className="bg-lightGray peer  h-12 w-[30vw] rounded-lg px-4 py-2 placeholder-transparent"
+                      />
+                      <label
+                        htmlFor="fullname"
+                        className="absolute left-2 bottom-14 pl-3 font-semibold capitalize text-black transition-all peer-focus:bottom-14 peer-placeholder-shown:bottom-3 "
+                      >
+                        Last Name
+                      </label>
+                    </div>
                     <div className="relative mb-10">
                       <input
                         placeholder="Address"
@@ -83,26 +102,26 @@ const Add = ({}) => {
                     {/* Massar Id */}
                     <div className="relative mb-10">
                       <input
-                        placeholder="CIN"
-                        id="cin"
-                        name="cin"
+                        placeholder="parentID"
+                        id="parentID"
+                        name="parentID"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.cin}
+                        value={values.parentID}
                         type="text"
                         className="bg-lightGray peer  h-12 w-[30vw] rounded-lg px-4 py-2 placeholder-transparent"
                       />
                       <label
-                        htmlFor="cin"
+                        htmlFor="parentID"
                         className="absolute left-2 bottom-14 pl-3 font-semibold capitalize text-black transition-all peer-focus:bottom-14 peer-placeholder-shown:bottom-3 "
                       >
-                        CIN
+                        Parent ID
                       </label>
                     </div>
                     {/* Level */}
                     <div className="relative mb-10">
                       <input
-                        placeholder="Phone Number"
+                        placeholder="Level"
                         id="Level"
                         name="phoneNumber"
                         onChange={handleChange}
@@ -115,45 +134,10 @@ const Add = ({}) => {
                         htmlFor="phoneNumber"
                         className="absolute left-2 bottom-14 pl-3 font-semibold capitalize text-black transition-all peer-focus:bottom-14 peer-placeholder-shown:bottom-3 "
                       >
-                        Phone Number
+                        Level
                       </label>
                     </div>
                     {/* childreen */}
-
-                    <div className="relative mb-10 grid grid-cols-2 w-full gap-4">
-                      {values.childreen.map((child, index) => {
-                        return (
-                          <div className="relative flex justify-center items-center">
-                            <input
-                              placeholder="Massar ID"
-                              id={`${index}`}
-                              name={`${index}`}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={values.childreen[index]}
-                              type="text"
-                              className="bg-lightGray peer  w-full rounded-lg px-4 py-2 placeholder-transparent"
-                            />
-                            <label
-                              htmlFor={`${index}`}
-                              className="absolute left-2 bottom-12 pl-3 font-semibold capitalize text-black transition-all peer-focus:bottom-12 peer-placeholder-shown:bottom-2 "
-                            >
-                              Massar ID (Child N.{index + 1})
-                            </label>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <div className="relative  mb-10 flex  w-full flex-1 justify-end ">
-                      <span
-                        className="px-4 py-2 rounded-md text-black  bg-white font-semibold cursor-pointer"
-                        onClick={() => {
-                          addNewChildFields();
-                        }}
-                      >
-                        Add Child
-                      </span>
-                    </div>
                   </div>
                   {/* save button */}
                   <div className="relative  mb-10 flex  w-full flex-1 justify-end ">
@@ -218,4 +202,4 @@ const Add = ({}) => {
   );
 };
 
-export default Add;
+export default AddStudent;

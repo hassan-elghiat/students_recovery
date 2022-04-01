@@ -1,14 +1,13 @@
 import React from "react";
 
 const StudentRow = ({
-  id,
+  studentId,
   firstName,
-  lastName,
+  lastName,dateBirth,
   picture,
   parentId,
   massarId,
   level,
-  age,
   gendre,
 }) => {
   const styleText = `text-dark flex w-[15%] flex-1 items-center  justify-center overflow-hidden overflow-ellipsis whitespace-nowrap text-center font-semibold`;
@@ -17,11 +16,11 @@ const StudentRow = ({
     <div
       className={` bg-lightGray bg-gray flex w-full  cursor-pointer  justify-between gap-1 rounded-xl px-2 py-1 `}
     >
-      <span className={`${styleText} pl-2 `}>{id}</span>
+      <span className={`${styleText} pl-2 `}>{studentId}</span>
       <span className={`${styleText} `}>{firstName + " " + lastName}</span>
       <span className={`${styleText}  `}>{massarId}</span>
+      <span className={`${styleText} `}>{dateBirth}</span>
       <span className={`${styleText} `}>{level}</span>
-      <span className={`${styleText} `}>{age}</span>
       {/* <span className={`${styleText}  `}>
         <ChildreenImages />
       </span> */}
@@ -31,7 +30,7 @@ const StudentRow = ({
           alt="editIcon"
           className="cursor-pointer hover:scale-110"
           onClick={() => {
-            alert(`edit ${id}`);
+            alert(`edit ${studentId}`);
           }}
         />
         <img
@@ -39,7 +38,7 @@ const StudentRow = ({
           alt="delteIcon"
           className="cursor-pointer hover:scale-110"
           onClick={() => {
-            alert(`delete ${id}`);
+            alert(`delete ${studentId}`);
           }}
         />
       </span>

@@ -2,7 +2,7 @@ import React from "react";
 import ChildreenImages from "./ChildreenImages";
 
 const ParentRow = ({
-  id,
+  parentId,
   firstName,
   lastName,
   cin,
@@ -17,7 +17,7 @@ const ParentRow = ({
       className={` bg-lightGray bg-gray flex w-full  cursor-pointer  justify-between gap-1 rounded-xl px-2 py-1 `}
       onClick={setSelected}
     >
-      <span className={`${styleText} pl-2 `}>{id}</span>
+      <span className={`${styleText} pl-2 `}>{parentId}</span>
       <span className={`${styleText} `}>{firstName + " " + lastName}</span>
       <span className={`${styleText}  `}>{address}</span>
       <span className={`${styleText} `}>{cin}</span>
@@ -31,7 +31,7 @@ const ParentRow = ({
           alt="editIcon"
           className="cursor-pointer hover:scale-110"
           onClick={() => {
-            alert(`edit ${id}`);
+            alert(`edit ${parentId}`);
           }}
         />
         <img
@@ -39,7 +39,7 @@ const ParentRow = ({
           alt="delteIcon"
           className="cursor-pointer hover:scale-110"
           onClick={() => {
-            alert(`delete ${id}`);
+            alert(`delete ${parentId}`);
           }}
         />
       </span>

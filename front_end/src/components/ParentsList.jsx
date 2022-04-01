@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ParentRow from "./ParentRow";
 
-const ParentsList = ({ list }) => {
+const ParentsList = ({ parents }) => {
   const [data, setData] = useState([]);
   const [selected, setSelected] = useState("");
   useEffect(() => {
@@ -43,9 +43,9 @@ const ParentsList = ({ list }) => {
           Actions
         </span>
       </div>
-      {Array.isArray(list) &&
-        (list.length !== 0 ? (
-          list.map((item) => {
+      {Array.isArray(parents) &&
+        (parents.length !== 0 ? (
+          parents.map((item) => {
             return (
               <ParentRow
                 key={`${item.id}`}
