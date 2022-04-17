@@ -5,10 +5,8 @@
 .grid-temp {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr 15fr;
-  grid-template-areas:
-    "header header header header header"
-    "delivered main main main queue";
+  grid-template-rows: 1fr;
+  grid-template-areas: "delivered main main main queue";
 }
 
 .header {

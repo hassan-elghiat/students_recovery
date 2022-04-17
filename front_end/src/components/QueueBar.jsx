@@ -72,15 +72,28 @@ const QueueBar = ({
   phoneNumber,
   students,
   index,
+  array,
+  setArray,
+  wait,
+  setWait,
 }) => {
   const imageSize = 16;
   return (
     // the code of the parent bar should be Here
     <div
-      className="w-full shadow-lg max flex flex-row items-center justify-between px-4 py-2  bg-gray-400 mb-4 rounded-2xl "
-      key={`child-${id}-${index}`}
+      className={`w-full shadow-lg max flex flex-row items-center justify-between px-4 py-2  ${
+        setArray ? `bg-red-100` : `bg-green-100`
+      } mb-4 rounded-2xl  `}
+      key={`quebarContainr-${id}-${firstName}`}
+      onClick={() => {
+        if (setArray) {
+          setWait([...wait, ...array.filter((e) => e.id === id)]);
+          console.log(wait);
+          setArray(array.filter((e) => e.id !== id));
+        }
+      }}
     >
-      <div className="grid place-items-center  rounded-full border-8  shadow-xl border-gray-200    h-24 aspect-square overflow-hidden ">
+      <div className="grid place-items-center  rounded-full border-2  shadow-xl border-white  h-24 aspect-square overflow-hidden ">
         <img src={photo} alt="parentImage" className="w-full aspect-square " />
       </div>
       <div className=" flex-1 px-[5%] ">
@@ -90,14 +103,15 @@ const QueueBar = ({
         className="flex flex-row justify-start  "
         style={{ width: `${(imageSize * 3) / 4}rem` }}
       >
-        {students.map((child, i) => (
+        {students?.map((child, i) => (
           // pour les image de l'enfant
           <div
-            className={`grid place-items-center max-h-24 rounded-full  shadow-xl border-4  border-gray-200 aspect-square bg-gray-400 overflow-hidden
+            className={`grid place-items-center max-h-24 rounded-full  shadow-xl border-2  border-white aspect-square bg-white overflow-hidden
           ${i !== 0 && "-ml-4"} `}
+            key={`childImage-${child.id}-${i}`}
           >
             <img
-              src={child.photo}
+              src={child.photo || child.image}
               alt="parentImage"
               className="object-cover w-full  aspect-square"
               style={{ height: `${imageSize / 4}rem` }}

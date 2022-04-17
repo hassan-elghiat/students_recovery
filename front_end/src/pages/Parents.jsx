@@ -1,20 +1,21 @@
-import React, { useState,useContext , useEffect} from "react";
+import Axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Parents as parentsList } from "../assets";
 import ParentsList from "../components/ParentsList";
 import Search from "../components/Search";
 
-import Axios from "axios";
-
 const Parents = () => {
   const [item, setItem] = useState();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [parents, setParents] = useState([]);
-  const url = `http://localhost:8090/parents/all`;
+  const url = `http://192.168.1.146:8090/parents/all`;
   useEffect(() => {
-    const headers = { 'Content-Type': 'application/json',"authorization":`${token}`};
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `${token}`,
+    };
     (async () => {
-      const res = await Axios.get(url, {headers});
+      const res = await Axios.get(url, { headers });
       setParents(res.data);
     })();
   }, []);

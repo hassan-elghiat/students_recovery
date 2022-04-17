@@ -33,7 +33,12 @@ const ParentShow = ({ firstName, lastName, photo, students }) => {
     <div className="relative w-full h-full bg-white rounded-lg p-8 flex  justify-start items-center shadow-lg overflow-hidden">
       {/* green dot */}
       <div className="h-8 aspect-square rounded-lg bg-green-400 absolute top-5 left-5 animate-bounce 	grid place-items-center">
-        <span className="text-white">{10 - secondsPassed }</span>
+        <span className="text-white">
+          {10 -
+            Math.abs(
+              Math.floor(Math.abs(secondsPassed) / 10) * 10 - secondsPassed - 1
+            )}
+        </span>
       </div>
       <motion.div
         initial={{ scale: 0 }}
@@ -53,7 +58,7 @@ const ParentShow = ({ firstName, lastName, photo, students }) => {
         <span className="font-semibold text-2xl capitalize">{`${firstName} ${lastName}`}</span>
       </motion.div>
       <div className=" grid grid-cols-1 min-w-[50%] aspect-square   ">
-        {students.map((child, childIndex) => {
+        {students?.map((child, childIndex) => {
           if (childIndex === currentIndex)
             return (
               <motion.div
@@ -71,7 +76,7 @@ const ParentShow = ({ firstName, lastName, photo, students }) => {
               `}
               >
                 <img
-                  src={`${child.photo}`}
+                  src={`${child.photo || child.image}`}
                   className="w-full h-full bg-gray-400 rounded-lg  shadow-lg"
                   alt=""
                 />

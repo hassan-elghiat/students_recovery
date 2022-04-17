@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
 import StudentsList from "../components/StudentsList";
@@ -8,15 +8,18 @@ const Students = () => {
   const [item, setItem] = useState();
   const [students, setStudents] = useState([]);
 
-  const token = localStorage.getItem('token');
-  const url = `http://localhost:8090/students/all`;
+  const token = localStorage.getItem("token");
+  const url = `http://192.168.1.146:8090/students/all`;
   useEffect(() => {
     console.log(token);
-    const headers = { 'Content-Type': 'application/json',"authorization":`${token}`};
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `${token}`,
+    };
     (async () => {
-      const res = await Axios.get(url, {headers});
+      const res = await Axios.get(url, { headers });
       setStudents(res.data);
-      console.log(res.data)
+      console.log(res.data);
     })();
   }, []);
   return (

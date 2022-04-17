@@ -1,43 +1,50 @@
-import { useEffect, useState, useCallback, useContext} from "react";
-
-import { GlobalContext } from "../contexts/GlobalContext";
-import { ErrorsContext } from "../contexts/ErrorsContext";
-import { useNavigate } from "react-router-dom";
-
 import Axios from "axios";
+import { useCallback, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ErrorsContext } from "../contexts/ErrorsContext";
+import { GlobalContext } from "../contexts/GlobalContext";
 
 const Login = ({}) => {
-
-  const navigate = useNavigate()
-  const { token, setToken, username, setUsername,password, setPassword,isLoggedIn, setIsLoggedIn } =
-    useContext(GlobalContext);
+  const navigate = useNavigate();
+  const {
+    token,
+    setToken,
+    username,
+    setUsername,
+    password,
+    setPassword,
+    isLoggedIn,
+    setIsLoggedIn,
+  } = useContext(GlobalContext);
   const { errors, setErrors } = useContext(ErrorsContext);
   const [loading, setLoading] = useState(false);
-  
 
-  const fetchResults = useCallback((data) => {
-    const url = "http://localhost:8090/login";
-    const login = async () => {
-      try {
-        const res = await Axios.post(url, data);
-        if (res.status !== 200) {
-          throw Error("Error during athentificating");
+  const fetchResults = useCallback(
+    (data) => {
+      const url = "http://192.168.1.146:8090/login";
+      const login = async () => {
+        try {
+          const res = await Axios.post(url, data);
+          if (res.status !== 200) {
+            throw Error("Error during athentificating");
+          }
+          setToken(`Bearer ${res.headers.authorization}`);
+          localStorage.setItem("token", `Bearer ${res.headers.authorization}`);
+          setIsLoggedIn(true);
+          navigate("/home");
+        } catch (err) {
+          const error =
+            err.message === "Network Error"
+              ? "Network Error, Please Check Your Internet Connection"
+              : err.message;
+          setErrors(error);
         }
-        setToken(`Bearer ${res.headers.authorization}`);
-        localStorage.setItem('token', `Bearer ${res.headers.authorization}`);
-        setIsLoggedIn(true);
-        navigate('/home');
-      } catch (err) {
-        const error =
-          err.message === "Network Error"
-            ? "Network Error, Please Check Your Internet Connection"
-            : err.message;
-        setErrors(error);
-      }
-    };
+      };
 
-    login();
-  }, [setToken, setErrors]);
+      login();
+    },
+    [setToken, setErrors]
+  );
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { username, password };
@@ -47,7 +54,7 @@ const Login = ({}) => {
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e) }>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 flex flex-col md:w-10/12 lg:w-5/12 mx-auto my-8">
         <div className="mb-4 ">
           <label
