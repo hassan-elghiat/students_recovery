@@ -29,7 +29,7 @@ const StudentsQueue = ({}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
-  const url = `http://192.168.1.146:8090/parents/all`;
+  const url = `http://localhost:8090/parents/all`;
 
   useEffect(() => {
     const headers = {

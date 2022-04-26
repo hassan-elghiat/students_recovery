@@ -21,7 +21,7 @@ const Login = ({}) => {
 
   const fetchResults = useCallback(
     (data) => {
-      const url = "http://192.168.1.146:8090/login";
+      const url = "http://localhost:8090/login";
       const login = async () => {
         try {
           const res = await Axios.post(url, data);

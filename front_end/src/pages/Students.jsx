@@ -9,7 +9,7 @@ const Students = () => {
   const [students, setStudents] = useState([]);
 
   const token = localStorage.getItem("token");
-  const url = `http://192.168.1.146:8090/students/all`;
+  const url = `http://localhost:8090/students/all`;
   useEffect(() => {
     console.log(token);
     const headers = {
