@@ -8,11 +8,7 @@ const Parents = () => {
   const [item, setItem] = useState();
   const token = localStorage.getItem("token");
   const [parents, setParents] = useState([]);
-<<<<<<< HEAD
   const url = `http://192.168.1.47:8090/parents/all`;
-=======
-  const url = `http://localhost:8090/parents/all`;
->>>>>>> 47df5f42e40b11b0a4aa2ca3ab45cf576aca23d0
   useEffect(() => {
     const headers = {
       "Content-Type": "application/json",

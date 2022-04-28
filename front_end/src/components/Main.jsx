@@ -1,33 +1,20 @@
 import axios from "axios";
+import * as _ from "lodash";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Parents } from "../assets";
 import { QueueBar } from "../components";
+import { setAll } from "../store/users";
 import ParentShow from "./ParentShow";
-function shuffle(array) {
-  let currentIndex = array.length,
-    randomIndex;
 
-  // While there remain elements to shuffle.
-  while (currentIndex != 0) {
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-}
 const StudentsQueue = ({}) => {
   const [shuffled, setShuffled] = useState();
   const [parents, setParents] = useState([]);
   const [delivered, setDelivered] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const count = useSelector((state) => state.users.value);
+  const dispatch = useDispatch();
 
   const url = `http://192.168.1.47:8090/parents/all`;
 
@@ -38,9 +25,7 @@ const StudentsQueue = ({}) => {
     };
     (async () => {
       const res = await axios.get(url, { headers });
-      if (res.status !== 200) setShuffled(shuffle(Parents));
-
-      setShuffled(shuffle(res.data));
+      dispatch(setAll(_.shuffle(res.status !== 200 ? Parents : res.data)));
     })();
   }, []);
 
@@ -152,14 +137,16 @@ const StudentsQueue = ({}) => {
         )}
       </div>
       <div
-        className="absolute z-50 bottom-12 right-12 h-24 aspect-square bg-red-400 rounded-full grid place-items-center cursor-pointer"
+        className="hidden z-50 bottom-12 right-12 h-24 aspect-square bg-red-400 rounded-full grid place-items-center cursor-pointer"
         onClick={() => {
-          const random = Math.floor(Math.random() * shuffled.length);
-          setParents([...parents, shuffled[random]]);
-          setShuffled(shuffled.filter((e, i) => i !== random));
+          // const random = Math.floor(Math.random() * shuffled.length);
+          // setParents([...parents, shuffled[random]]);
+          // setShuffled(shuffled.filter((e, i) => i !== random));
         }}
       >
-        <span className="uppercase text-white font-bold text-lg">scan</span>
+        <span className="uppercase text-white font-bold text-lg">
+          scan {count}
+        </span>
       </div>
     </div>
   );

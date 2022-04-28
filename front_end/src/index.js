@@ -1,22 +1,25 @@
 import React from "react";
 import { render } from "react-dom";
+import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
+import ErrorsContextProvider from "./contexts/ErrorsContext";
+import GlobalContextProvider from "./contexts/GlobalContext";
 import "./index.css";
 import AddParent from "./pages/AddParent";
 import AddStudent from "./pages/AddStudent";
 import Login from "./pages/Login";
 import Parents from "./pages/Parents";
+import Simulation from "./pages/Simulation";
 import Students from "./pages/Students";
 import reportWebVitals from "./reportWebVitals";
+import { store } from "./store";
 
-import ErrorsContextProvider from "./contexts/ErrorsContext";
-import GlobalContextProvider from "./contexts/GlobalContext";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
 render(
-  <BrowserRouter>
-    <>
+  <Provider store={store}>
+    <BrowserRouter>
       <GlobalContextProvider>
         <ErrorsContextProvider>
           <Nav />
@@ -27,6 +30,7 @@ render(
             <Route path="student" element={<Students />} />
             <Route path="/add-parent" element={<AddParent />} />
             <Route path="/add-student" element={<AddStudent />} />
+            <Route path="simulation" element={<Simulation />} />
             <Route
               path="*"
               element={
@@ -44,8 +48,8 @@ render(
           <Footer />
         </ErrorsContextProvider>
       </GlobalContextProvider>
-    </>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
