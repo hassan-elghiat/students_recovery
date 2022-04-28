@@ -23,13 +23,13 @@ function shuffle(array) {
   return array;
 }
 const StudentsQueue = ({}) => {
-  const [shuffled, setShuffled] = useState(shuffle(Parents));
+  const [shuffled, setShuffled] = useState();
   const [parents, setParents] = useState([]);
   const [delivered, setDelivered] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
-  const url = `http://192.168.1.146:8090/parents/all`;
+  const url = `http://192.168.1.47:8090/parents/all`;
 
   useEffect(() => {
     const headers = {
@@ -38,35 +38,38 @@ const StudentsQueue = ({}) => {
     };
     (async () => {
       const res = await axios.get(url, { headers });
-      console.log("hel");
-      setParents(res.data);
+      if (res.status !== 200) setShuffled(shuffle(Parents));
+
+      setShuffled(shuffle(res.data));
     })();
   }, []);
 
   useEffect(() => {
+    // when th queue bar should aprear
+    // const interval1 = setInterval(() => {
+    //   if (shuffled.length) {
+    //     const random = Math.floor(Math.random() * shuffled.length);
+    //     setParents([...parents, shuffled[random]]);
+    //     setShuffled(shuffled.filter((e, i) => i !== random));
+    //     console.log(shuffled);
+    //   }
+    // }, 1500);
+    // when should change centered parent
     let ind = 0;
-    const interval = setInterval(() => {
+    const interval2 = setInterval(() => {
       if (ind + 1 > parents.length - 1) {
         ind = 0;
+      } else {
+        ind += 1;
       }
       console.log(`cuurent ${ind}`);
-      setCurrentIndex(ind++);
+      setCurrentIndex(ind);
     }, 1000 * 10);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parents]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (shuffled.length) {
-        const random = Math.floor(Math.random() * shuffled.length);
-        setParents([...parents, shuffled[random]]);
-        setShuffled(shuffled.filter((e, i) => i !== random));
-        console.log(shuffled);
-      }
-    }, 1500);
-
-    return () => clearInterval(interval);
+    return () => {
+      // clearInterval(interval1);
+      clearInterval(interval2);
+    };
   }, [shuffled, parents]);
 
   return (
@@ -147,6 +150,16 @@ const StudentsQueue = ({}) => {
             </span>
           </div>
         )}
+      </div>
+      <div
+        className="absolute z-50 bottom-12 right-12 h-24 aspect-square bg-red-400 rounded-full grid place-items-center cursor-pointer"
+        onClick={() => {
+          const random = Math.floor(Math.random() * shuffled.length);
+          setParents([...parents, shuffled[random]]);
+          setShuffled(shuffled.filter((e, i) => i !== random));
+        }}
+      >
+        <span className="uppercase text-white font-bold text-lg">scan</span>
       </div>
     </div>
   );

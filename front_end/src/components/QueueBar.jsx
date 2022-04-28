@@ -87,9 +87,9 @@ const QueueBar = ({
       key={`quebarContainr-${id}-${firstName}`}
       onClick={() => {
         if (setArray) {
-          setWait([...wait, ...array.filter((e) => e.id === id)]);
+          setWait([...wait, ...array.filter((e) => e.parentId === id)]);
           console.log(wait);
-          setArray(array.filter((e) => e.id !== id));
+          setArray(array.filter((e) => e.parentId !== id));
         }
       }}
     >
